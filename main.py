@@ -97,7 +97,7 @@ def command_system():
     
     # keep prompting until we get a valid host file
     while not host_dict:
-        filename = input("Enter host filename: ")
+        filename = input("Enter host filename: ").strip()
         
         try:
             host_dict = load_hosts(filename)
