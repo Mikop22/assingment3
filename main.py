@@ -103,11 +103,11 @@ def command_system():
             host_dict = load_hosts(filename)
             # if we got a dict, but it's empty, treat it as invalid format
             if not host_dict:
-                print("Incorrect host file format")
+                print("Invalid host file format")
         except FileNotFoundError:
             print("Invalid host filename")
         except (ValueError, IndexError):
-            print("Incorrect host file format")
+            print("Invalid host file format")
     
     # main command loop
     while True:
