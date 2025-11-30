@@ -16,16 +16,16 @@ def parse_command(text, host_dict):
     """
     Parse and execute user commands
     Commands must have exactly 3 parts: command type, parameter, and output filename
-    No exception catching here - just raise them for command_system to handle
+    No exception catching
     """
     
-    # strip leading/trailing whitespace
+    # strip the leading/trailing whitespace
     text = text.strip()
     
-    # split the command into parts, handling quoted strings for country names
+    # split the command into parts in order to handle quoted strings for country names
     # First check if we have a quoted string (for country command)
     if "'" in text:
-        # Find the first quote and last quote positions
+        # Find the first quote and last quote place 
         first_quote = text.find("'")
         last_quote = text.rfind("'")
         
@@ -38,7 +38,7 @@ def parse_command(text, host_dict):
             # Get everything after the last quote
             after_quote = text[last_quote+1:].strip().split()
             
-            # Should have exactly: command before, quoted string, filename after
+            #Should be exactly: command before, quoted string, filename after
             if len(before_quote) != 1 or len(after_quote) != 1:
                 raise ValueError("Incorrect command parameters")
             
@@ -48,10 +48,10 @@ def parse_command(text, host_dict):
         else:
             raise ValueError("Incorrect command parameters")
     else:
-        # No quotes - split normally (for year command)
+        # No quotes so split normally (for year command)
         parts = text.split()
         
-        # check we have exactly 3 parts
+        # check that we have exactly 3 parts
         if len(parts) != 3:
             raise ValueError("Incorrect command parameters")
         
@@ -77,7 +77,7 @@ def parse_command(text, host_dict):
         output_year_results(output_filename, host_dict, year)
         
     elif command == 'country':
-        # country name must be surrounded by single quotes
+        # country name must be surrunded by single quotes
         if not (parameter.startswith("'") and parameter.endswith("'")):
             raise ValueError("Incorrect command parameters")
             
@@ -90,19 +90,18 @@ def command_system():
     """
     Main interactive command loop
     Prompts for host file first, then enters command loop
-    This function catches exceptions from parse_command
+    to catch exceptions from parse_command
     """
     
     host_dict = None
     
     # keep prompting until we get a valid host file
     while not host_dict:
-        # use exact prompt from instructions "Enter host filename: "
         filename = input("Enter host filename: ")
         
         try:
             host_dict = load_hosts(filename)
-            # if we got a dict, but it's empty, treat as invalid format
+            # if we got a dict, but it's empty, treat it as invalid format
             if not host_dict:
                 print("Incorrect host file format")
         except FileNotFoundError:
