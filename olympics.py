@@ -58,7 +58,7 @@ def load_medals(filename):
                 
             parts = line.strip().split(',')
             
-            # Wrap parsing in try/except to prevent crashing on bad data (Fix for Test 7)
+            # Wrap to prevent crashing on bad data
             try:
                 country = parts[0].strip()
                 gold = int(parts[1].strip())
@@ -242,5 +242,4 @@ def output_year_results(filename, host_dict, year):
         file.write(f"Most gold medals: {max_gold} by {gold_str}\n")
         file.write(f"Most silver medals: {max_silver} by {silver_str}\n")
         file.write(f"Most bronze medals: {max_bronze} by {bronze_str}\n")
-        # no newline on last line
         file.write(f"Most total medals: {max_total} by {total_str}")
