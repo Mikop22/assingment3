@@ -111,7 +111,7 @@ def command_system():
     
     # main command loop
     while True:
-        command = input("Enter command: ")
+        command = input("Enter a valid command: ")
         
         # check for quit command (case insensative)
         if command.strip().lower() == 'quit':
